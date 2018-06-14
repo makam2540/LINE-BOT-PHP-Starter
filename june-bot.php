@@ -43,7 +43,7 @@ if (strpos($_msg, 'น้องเน่จำนะ') !== false) {
     $arrPostData['messages'][0]['text'] = 'โอเครบิช';
   }
 }else{
-  if($isData>=0){
+  if($isData>0){
    foreach($data as $rec){
     $arrPostData = array();
     $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
@@ -55,7 +55,6 @@ if (strpos($_msg, 'น้องเน่จำนะ') !== false) {
     $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
     $arrPostData['messages'][0]['type'] = "text";
     $arrPostData['messages'][0]['text'] = 'พูดไรวะ';
-    //แต่คุณสามารถสอนผมให้ฉลาดได้แค่พิมพ์ : สอน[คำถาม,คำตอบ]
     
     //$url2 = 'https://api.mlab.com/api/1/databases/junebot/collections/answer?apiKey='.$api_key.'';
     //$json = file_get_contents('https://api.mlab.com/api/1/databases/junebot/collections/answer?apiKey='.$api_key.'&q={"question":"'.$_msg.'"}');
