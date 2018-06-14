@@ -58,8 +58,8 @@ if (strpos($_msg, 'สอนใหม่') !== false) {
     $arrPostData = array();
     $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
     $arrPostData['messages'][0]['type'] = "text";
-    $arrPostData['messages'][0]['text'] = 'เดี๋ยวๆ อันนี้ไม่รู้เรื่องอ่ะ แต่คุณสามารถสอนผมให้ฉลาดได้แค่พิมพ์ : สอนใหม่[คำถาม-คำตอบ]';
-  }
+    $arrPostData['messages'][0]['text'] = 'เดี๋ยวๆ อันนี้ไม่รู้เรื่องอ่ะ';
+  } //แต่คุณสามารถสอนผมให้ฉลาดได้แค่พิมพ์ : สอนใหม่[คำถาม-คำตอบ]
 }
 
 
