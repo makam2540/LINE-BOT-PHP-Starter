@@ -14,10 +14,6 @@ $data = json_decode($json);
 $isData=sizeof($data);
 
 
-$url2 = 'https://api.mlab.com/api/1/databases/junebot/collections/answer?apiKey='.$api_key.'';
-$json2 = file_get_contents2('https://api.mlab.com/api/1/databases/junebot/collections/answer?apiKey='.$api_key.'&q={"question":"'.$_msg.'"}');
-$data2 = json_decode2($json2);
-$isData2=sizeof($data2);
 
 if (strpos($_msg, 'สอน') !== false) {
   if (strpos($_msg, 'สอน') !== false) {
@@ -60,14 +56,19 @@ if (strpos($_msg, 'สอน') !== false) {
     $arrPostData['messages'][0]['type'] = "text";
     $arrPostData['messages'][0]['text'] = 'เดี๋ยวๆ อันนี้ไม่รู้เรื่องอ่ะ';
     //แต่คุณสามารถสอนผมให้ฉลาดได้แค่พิมพ์ : สอน[คำถาม,คำตอบ]
-
+    
+    $url2 = 'https://api.mlab.com/api/1/databases/junebot/collections/answer?apiKey='.$api_key.'';
+    $json2 = file_get_contents2('https://api.mlab.com/api/1/databases/junebot/collections/answer?apiKey='.$api_key.'&q={"question":"'.$_msg.'"}');
+    $data2 = json_decode2($json2);
+    $isData2=sizeof($data2);
+    
     $newData2 = json_encode2(  
-        array2(
+        array(
           'question' => $_question2,
         )
       );
-      $opts2 = array2(
-        'http' => array2(
+      $opts2 = array(
+        'http' => array(
             'method' => "POST",
             'header' => "Content-type: application/json",
             'content' => $newData2
@@ -75,7 +76,7 @@ if (strpos($_msg, 'สอน') !== false) {
       );
       $context2 = stream_context_create($opts2);
       $returnValue = file_get_contents($url,false,$context2);
-      $arrPostData = array2();
+      $arrPostData = array();
 
 
   }
