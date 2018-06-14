@@ -19,7 +19,7 @@ if (strpos($_msg, 'น้องเน่จำนะ') !== false) {
   if (strpos($_msg, 'น้องเน่จำนะ') !== false) {
     $x_tra = str_replace("น้องเน่จำนะ","", $_msg);
     $pieces = explode(",", $x_tra);
-    $_question=str_replace(" ","",$pieces[0]);
+    $_question=str_replace("","",$pieces[0]);
     $_answer=str_replace("","",$pieces[1]);
     //Post New Data
     $newData = json_encode(  
@@ -43,7 +43,7 @@ if (strpos($_msg, 'น้องเน่จำนะ') !== false) {
     $arrPostData['messages'][0]['text'] = 'โอเครบิช';
   }
 }else{
-  if($isData >0){
+  if($isData>=0){
    foreach($data as $rec){
     $arrPostData = array();
     $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
@@ -57,7 +57,7 @@ if (strpos($_msg, 'น้องเน่จำนะ') !== false) {
     $arrPostData['messages'][0]['text'] = 'พูดไรวะ';
     //แต่คุณสามารถสอนผมให้ฉลาดได้แค่พิมพ์ : สอน[คำถาม,คำตอบ]
     
-    $url2 = 'https://api.mlab.com/api/1/databases/junebot/collections/answer?apiKey='.$api_key.'';
+    //$url2 = 'https://api.mlab.com/api/1/databases/junebot/collections/answer?apiKey='.$api_key.'';
     //$json = file_get_contents('https://api.mlab.com/api/1/databases/junebot/collections/answer?apiKey='.$api_key.'&q={"question":"'.$_msg.'"}');
     //$data = json_decode($json);
     //$isData=sizeof($data);
