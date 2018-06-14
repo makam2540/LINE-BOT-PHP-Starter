@@ -19,7 +19,7 @@ if (strpos($_msg, 'น้องเน่จำนะ') !== false) {
   if (strpos($_msg, 'น้องเน่จำนะ') !== false) {
     $x_tra = str_replace("น้องเน่จำนะ","", $_msg);
     $pieces = explode(",", $x_tra);
-    $_question=str_replace("","",$pieces[0]);
+    $_question=str_replace(" ","",$pieces[0]);
     $_answer=str_replace("","",$pieces[1]);
     //Post New Data
     $newData = json_encode(  
