@@ -47,7 +47,7 @@ if (strpos($_msg, 'น้องเน่จำนะ') !== false) {
    foreach($data as $rec){
     $arrPostData = array();
     $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
-        if($rec->answer > 0){
+        if( sizeof($rec->answer) > 0){
                 $arrPostData['messages'][0]['type'] = "text";
                 $arrPostData['messages'][0]['text'] = $rec->answer;
         }
@@ -55,7 +55,7 @@ if (strpos($_msg, 'น้องเน่จำนะ') !== false) {
             $arrPostData = array();
             $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
             $arrPostData['messages'][0]['type'] = "text";
-            $arrPostData['messages'][0]['text'] = 'อบอกว่าไม่รู้เรื่องไงครับ สอนผมสิๆ';
+            $arrPostData['messages'][0]['text'] = 'บอกว่าไม่รู้เรื่องไงครับ สอนผมสิๆ';
         }
     }
   }else{
