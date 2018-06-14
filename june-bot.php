@@ -22,7 +22,7 @@ $isData=sizeof($data);
 if (strpos($_msg, 'สอนใหม่') !== false) {
   if (strpos($_msg, 'สอนใหม่') !== false) {
     $x_tra = str_replace("สอนใหม่","", $_msg);
-    $pieces = explode("|", $x_tra);
+    $pieces = explode("-", $x_tra);
     $_question=str_replace("[","",$pieces[0]);
     $_answer=str_replace("]","",$pieces[1]);
     //Post New Data
@@ -58,7 +58,7 @@ if (strpos($_msg, 'สอนใหม่') !== false) {
     $arrPostData = array();
     $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
     $arrPostData['messages'][0]['type'] = "text";
-    $arrPostData['messages'][0]['text'] = 'เดี๋ยวๆ คุณสามารถสอนผมให้ฉลาดได้แค่พิมพ์: สอนใหม่[คำถาม|คำตอบ]';
+    $arrPostData['messages'][0]['text'] = 'เดี๋ยวๆ อันนี้ไม่รู้เรื่องอ่ะ แต่คุณสามารถสอนผมให้ฉลาดได้แค่พิมพ์ : สอนใหม่[คำถาม-คำตอบ]';
   }
 }
 
