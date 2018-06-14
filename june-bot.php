@@ -40,7 +40,7 @@ if (strpos($_msg, 'น้องเน่จำนะ') !== false) {
     $arrPostData = array();
     $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
     $arrPostData['messages'][0]['type'] = "text";
-    $arrPostData['messages'][0]['text'] = 'โอเครบิช';
+    $arrPostData['messages'][0]['text'] = 'ขอบคุณนะ (´▽｀)';
   }
 }else{
   if($isData>0){
@@ -62,12 +62,8 @@ if (strpos($_msg, 'น้องเน่จำนะ') !== false) {
     $arrPostData = array();
     $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
     $arrPostData['messages'][0]['type'] = "text";
-    $arrPostData['messages'][0]['text'] = 'ต้องการไร ไม่รู้เรื่อง';
+    $arrPostData['messages'][0]['text'] = 'อันนี้ไม่รู้เรื่องครับ สอนหน่อย';
     
-    //$url2 = 'https://api.mlab.com/api/1/databases/junebot/collections/answer?apiKey='.$api_key.'';
-    //$json = file_get_contents('https://api.mlab.com/api/1/databases/junebot/collections/answer?apiKey='.$api_key.'&q={"question":"'.$_msg.'"}');
-    //$data = json_decode($json);
-    //$isData=sizeof($data);
 
     $nonData = json_encode(  
         array(
