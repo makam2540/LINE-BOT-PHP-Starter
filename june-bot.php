@@ -76,7 +76,7 @@ if (strpos($_msg, 'สอน') !== false) {
       );
       $context = stream_context_create($opts);
       $returnValue = file_get_contents($url2,false,$context);
-      $arrPostData = array();
+      //$arrPostData = array();
    
   }
 }
