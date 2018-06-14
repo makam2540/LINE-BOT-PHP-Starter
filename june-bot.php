@@ -15,7 +15,7 @@ $isData=sizeof($data);
 
 
 $url2 = 'https://api.mlab.com/api/1/databases/junebot/collections/answer?apiKey='.$api_key.'';
-$json2 = file_get_contents('https://api.mlab.com/api/1/databases/junebot/collections/answer?apiKey='.$api_key.'&q={"question":"'.$_msg.'"}');
+$json2 = file_get_contents2('https://api.mlab.com/api/1/databases/junebot/collections/answer?apiKey='.$api_key.'&q={"question":"'.$_msg.'"}');
 $data2 = json_decode2($json2);
 $isData2=sizeof($data2);
 
