@@ -24,7 +24,7 @@ if (strpos($_msg, 'สอน') !== false) {
     //Post New Data
     $newData = json_encode(  
       array(
-        'questiont' => $_question,
+        'question' => $_question,
         'answer'=> $_answer
       )
     );
@@ -57,6 +57,26 @@ if (strpos($_msg, 'สอน') !== false) {
     $arrPostData['messages'][0]['text'] = 'เดี๋ยวๆ อันนี้ไม่รู้เรื่องอ่ะ';
     //แต่คุณสามารถสอนผมให้ฉลาดได้แค่พิมพ์ : สอน[คำถาม,คำตอบ]
     
+    $url2 = 'https://api.mlab.com/api/1/databases/junebot/collections/answer?apiKey='.$api_key.'';
+    //$json = file_get_contents('https://api.mlab.com/api/1/databases/junebot/collections/answer?apiKey='.$api_key.'&q={"question":"'.$_msg.'"}');
+    //$data = json_decode($json);
+    //$isData=sizeof($data);
+
+    $nonData = json_encode(  
+        array(
+          'questionByUserNonAns' => $_msg,
+        )
+      );
+      $opts = array(
+        'http' => array(
+            'method' => "POST",
+            'header' => "Content-type: application/json",
+            'content' => $nonData
+         )
+      );
+      $context = stream_context_create($opts);
+      $returnValue = file_get_contents($url2,false,$context);
+      $arrPostData = array();
    
   }
 }
