@@ -54,7 +54,7 @@ if (strpos($_msg, 'น้องเน่จำนะ') !== false) {
     $arrPostData = array();
     $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
     $arrPostData['messages'][0]['type'] = "text";
-    $arrPostData['messages'][0]['text'] = 'เดี๋ยวๆ อันนี้ไม่รู้เรื่องอ่ะ';
+    $arrPostData['messages'][0]['text'] = 'พูดไรวะ';
     //แต่คุณสามารถสอนผมให้ฉลาดได้แค่พิมพ์ : สอน[คำถาม,คำตอบ]
     
     $url2 = 'https://api.mlab.com/api/1/databases/junebot/collections/answer?apiKey='.$api_key.'';
