@@ -8,9 +8,9 @@ $arrHeader[] = "Content-Type: application/json";
 $arrHeader[] = "Authorization: Bearer {$strAccessToken}";
 $_msg = $arrJson['events'][0]['message']['text'];
 
-$api_key="c-9iVt7OvlHt_HeJci-4E3dL-PpBhF77";
-$url = 'https://api.mlab.com/api/1/databases/junebot/collections/question?apiKey='.$api_key.'';
-$json = file_get_contents('https://api.mlab.com/api/1/databases/junebot/collections/question?apiKey='.$api_key.'&q={"question":"'.$_msg.'"}');
+$api_key="7wjZz1XxwnIgY8jDYbPDa_XpDZTtNWsp";
+$url = 'https://api.mlab.com/api/1/databases/sangster-bot/collections/q_sangster?apiKey='.$api_key.'';
+$json = file_get_contents('https://api.mlab.com/api/1/databases/sangster/collections/q_sangster?apiKey='.$api_key.'&q={"question":"'.$_msg.'"}');
 $data = json_decode($json);
 $isData=sizeof($data);
 
@@ -28,7 +28,7 @@ if (strpos($_msg, 'น้องเน่จำนะ') !== false) {
        'question' => $_question,
         'answer'=> $_answer
       )
-    );exit();
+    );//exit();
     $opts = array(
       'http' => array(
           'method' => "POST",
