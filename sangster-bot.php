@@ -35,7 +35,7 @@ if (strpos($_msg, 'น้องเน่จำนะ') !== false) {
           'header' => "Content-type: application/json",
           'content' => $newData
        )
-    );
+    ); exit();
    $context = stream_context_create($opts);
     $returnValue = file_get_contents($url,false,$context);
     $arrPostData = array();
