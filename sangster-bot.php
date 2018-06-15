@@ -49,7 +49,7 @@
     }else {
         $arrayPostData['replyToken'] = $arrayJson['events'][0]['replyToken'];
         $arrayPostData['messages'][0]['type'] = "text";
-        $arrayPostData['messages'][0]['text'] = "โทดที ยังโง่อยู่ เลยไม่เข้าใจ";
+        $arrayPostData['messages'][0]['text'] = "โทดทีไม่เข้าใจ";
         replyMsg($arrayHeader,$arrayPostData);        
     }
 
