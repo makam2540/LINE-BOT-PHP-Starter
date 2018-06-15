@@ -16,9 +16,9 @@ $isData=sizeof($data);
 
 //echo "==".$data;
 
-if (strpos($_msg, 'น้องเน่จำนะ') !== false) {
-  if (strpos($_msg, 'น้องเน่จำนะ') !== false) {
-    $x_tra = str_replace("น้องเน่จำนะ","", $_msg);
+if (strpos($_msg, 'คุณแซงค์จำนะ') !== false) {
+  if (strpos($_msg, 'คุณแซงค์จำนะ') !== false) {
+    $x_tra = str_replace("คุณแซงค์จำนะ","", $_msg);
     $pieces = explode(",", $x_tra);
     $_question=str_replace(" ","",$pieces[0]);
     $_answer=str_replace("","",$pieces[1]); 
@@ -41,7 +41,7 @@ if (strpos($_msg, 'น้องเน่จำนะ') !== false) {
     $arrPostData = array();
     $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
     $arrPostData['messages'][0]['type'] = "text";
-    $arrPostData['messages'][0]['text'] = 'ขอบคุณนะ (´▽｀)';
+    $arrPostData['messages'][0]['text'] = 'ขอบคุณนะครับ';
   }
 }else{
 //  if($isData>0){
@@ -56,7 +56,7 @@ if (strpos($_msg, 'น้องเน่จำนะ') !== false) {
             $arrPostData = array();
             $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
             $arrPostData['messages'][0]['type'] = "text";
-            $arrPostData['messages'][0]['text'] = 'บอกว่าไม่รู้เรื่องไงครับ สอนผมสิๆ';
+            $arrPostData['messages'][0]['text'] = 'ไม่รู้เรื่องครับ สอนผมสิ';
 //        }
 //    }
 //  }else{
