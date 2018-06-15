@@ -52,14 +52,15 @@ if (strpos($_msg, 'คุณแซงค์จำนะ') !== false) {
                 $arrPostData['messages'][0]['type'] = "text";
                 $arrPostData['messages'][0]['text'] = $rec->answer;
         }
-//        else{
-  //          $arrPostData = array();
-    //      $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
-      //      $arrPostData['messages'][0]['type'] = "text";
-     //     $arrPostData['messages'][0]['text'] = 'บอกว่าไม่รู้เรื่องไงครับ สอนผมสิๆ';
+        else{
+           $arrPostData = array();
+           $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
+           $arrPostData['messages'][0]['type'] = "text";
+           $arrPostData['messages'][0]['text'] = 'บอกว่าไม่รู้เรื่องไงครับ สอนผมสิๆ';
      
-//        }
-//    }
+        }
+    }
+  }
 //  }else{
 //    $arrPostData = array();
 //    $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
