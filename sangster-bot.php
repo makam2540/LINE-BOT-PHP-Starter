@@ -44,45 +44,45 @@ if (strpos($_msg, 'คุณแซงค์จำนะ') !== false) {
     $arrPostData['messages'][0]['text'] = 'ขอบคุณนะครับ';
   }
 }else{
-//  if($isData>0){
-//   foreach($data as $rec){
-//    $arrPostData = array();
-//    $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
-//        if( sizeof($rec->answer) > 0){
-//                $arrPostData['messages'][0]['type'] = "text";
-//                $arrPostData['messages'][0]['text'] = $rec->answer;
-//        }
-//        else{
+  if($isData>0){
+   foreach($data as $rec){
+    $arrPostData = array();
+    $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
+        if( sizeof($rec->answer) > 0){
+                $arrPostData['messages'][0]['type'] = "text";
+                $arrPostData['messages'][0]['text'] = $rec->answer;
+        }
+        else{
             $arrPostData = array();
             $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
             $arrPostData['messages'][0]['type'] = "text";
             $arrPostData['messages'][0]['text'] = 'ไม่รู้เรื่องครับ สอนผมสิ';
-//        }
-//    }
-//  }else{
-//    $arrPostData = array();
-//    $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
-//    $arrPostData['messages'][0]['type'] = "text";
-//    $arrPostData['messages'][0]['text'] = 'อันนี้ไม่รู้เรื่องครับ สอนหน่อย';
-    
+        }
+    }
+  }else{
+    $arrPostData = array();
+    $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
+    $arrPostData['messages'][0]['type'] = "text";
+    $arrPostData['messages'][0]['text'] = 'อันนี้ไม่รู้เรื่องครับ สอนหน่อย';
 
-//    $nonData = json_encode(  
-//        array(
-//          'question' => $_msg,
-//        )
-//      );
-//      $opts = array(
-//        'http' => array(
-//            'method' => "POST",
-//            'header' => "Content-type: application/json",
-//            'content' => $nonData
-//         )
-//      );
-//      $context = stream_context_create($opts);
-//      $returnValue = file_get_contents($url,false,$context);
-      //$arrPostData = array();
+
+    $nonData = json_encode(  
+        array(
+          'question' => $_msg,
+        )
+      );
+      $opts = array(
+        'http' => array(
+            'method' => "POST",
+            'header' => "Content-type: application/json",
+            'content' => $nonData
+         )
+      );
+      $context = stream_context_create($opts);
+      $returnValue = file_get_contents($url,false,$context);
+        $arrPostData = array();
    
-//  }
+  }
 }
 $channel = curl_init();
 curl_setopt($channel, CURLOPT_URL,$strUrl);
