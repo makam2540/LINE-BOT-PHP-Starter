@@ -6,6 +6,7 @@ $strUrl = "https://api.line.me/v2/bot/message/reply";
 $arrHeader = array();
 $arrHeader[] = "Content-Type: application/json";
 $arrHeader[] = "Authorization: Bearer {$strAccessToken}";
+
 $_msg = $arrJson['events'][0]['message']['text'];
 
 $api_key="7wjZz1XxwnIgY8jDYbPDa_XpDZTtNWsp";
