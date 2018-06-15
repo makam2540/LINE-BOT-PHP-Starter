@@ -65,29 +65,28 @@ if (strpos($_msg, 'คุณแซงค์จำนะ') !== false) {
         }
 
 }
-// else{
-//           $arrPostData = array();
-//           $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
-//           $arrPostData['messages'][0]['type'] = "text";
-//           $arrPostData['messages'][0]['text'] = 'เขาไม่รู้เรื่องอ่ะ สอนเขาหน่อยสิเธอ';
-       
-//                   $nonData = json_encode(  
-//                        array(
-//                          'question' => $_msg,
-//                        )
-//                  );
-//                  $opts = array(
-//                    'http' => array(
-//                        'method' => "POST",
-//                        'header' => "Content-type: application/json",
-//                        'content' => $nonData
-//                     )
-//                  );
-//                  $context = stream_context_create($opts);
-//                  $returnValue = file_get_contents($url,false,$context);
-//                  $arrPostData = array();
-//         }
-// }
+else{
+                
+                  $nonData = json_encode(  
+                       array(
+                         'question' => $_msg,
+                       )
+                 );
+                 $opts = array(
+                   'http' => array(
+                       'method' => "POST",
+                       'header' => "Content-type: application/json",
+                       'content' => $nonData
+                    )
+                 );
+                 $context = stream_context_create($opts);
+                 $returnValue = file_get_contents($url,false,$context);
+                 $arrPostData = array();
+                  $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
+                  $arrPostData['messages'][0]['type'] = "text";
+                  $arrPostData['messages'][0]['text'] = 'เขาไม่รู้เรื่องอ่ะ สอนเขาหน่อยสิเธอ';
+        }
+
   
 
 $channel = curl_init();
