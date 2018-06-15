@@ -43,7 +43,7 @@ if (strpos($_msg, 'คุณแซงค์จำนะ') !== false) {
     $arrPostData['messages'][0]['type'] = "text";
     $arrPostData['messages'][0]['text'] = 'ขอบคุณที่สอนครับ';
   }
-}else{
+/*}else{
   if($isData>0){
    foreach($data as $rec){
     $arrPostData = array();
@@ -59,8 +59,27 @@ if (strpos($_msg, 'คุณแซงค์จำนะ') !== false) {
            $arrPostData['messages'][0]['text'] = 'บอกว่าไม่รู้เรื่องไงครับ สอนผมสิๆ';
      
         }
-    }
+    }*/
+  
+    }else{
+  if($isData >0){
+   foreach($data as $rec){
+    $arrPostData = array();
+    $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
+    $arrPostData['messages'][0]['type'] = "text";
+    $arrPostData['messages'][0]['text'] = $rec->answer;
+   }
+  }else{
+    $arrPostData = array();
+    $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
+    $arrPostData['messages'][0]['type'] = "text";
+    $arrPostData['messages'][0]['text'] = 'ก๊าบบ คุณสามารถสอนให้ฉลาดได้เพียงพิมพ์: สอนเป็ด[คำถาม|คำตอบ]';
   }
+}
+    
+    
+    
+    
 //  }else{
 //    $arrPostData = array();
 //    $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
