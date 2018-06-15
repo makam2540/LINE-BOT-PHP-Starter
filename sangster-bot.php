@@ -10,7 +10,7 @@ $_msg = $arrJson['events'][0]['message']['text'];
 
 $api_key="7wjZz1XxwnIgY8jDYbPDa_XpDZTtNWsp";
 $url = 'https://api.mlab.com/api/1/databases/sangster-bot/collections/q_sangster?apiKey='.$api_key.'';
-$json = file_get_contents('https://api.mlab.com/api/1/databases/sangster/collections/q_sangster?apiKey='.$api_key.'&q={"question":"'.$_msg.'"}');
+$json = file_get_contents('https://api.mlab.com/api/1/databases/sangster-bot/collections/q_sangster?apiKey='.$api_key.'&q={"question":"'.$_msg.'"}');
 $data = json_decode($json);
 $isData=sizeof($data);
 
