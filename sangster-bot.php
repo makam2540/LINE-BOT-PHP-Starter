@@ -18,31 +18,31 @@ $isData=sizeof($data);
 
 if (strpos($_msg, 'คุณแซงค์จำนะ') !== false) {
   if (strpos($_msg, 'คุณแซงค์จำนะ') !== false) {
-    $x_tra = str_replace("คุณแซงค์จำนะ","", $_msg);
-    $pieces = explode("-", $x_tra);
-    $_question=str_replace(" ","",$pieces[0]);
-    $_answer=str_replace("","",$pieces[1]);
-    //Post New Data
-    $newData = json_encode(
-      array(
-        'question' => $_question,
-        'answer'=> $_answer
-      )
-    );
-    $opts = array(
-      'http' => array(
-          'method' => "POST",
-          'header' => "Content-type: application/json",
-          'content' => $newData
-       )
-    );
-    $context = stream_context_create($opts);
-    $returnValue = file_get_contents($url,false,$context);
-    $arrPostData = array();
-    $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
-    $arrPostData['messages'][0]['type'] = "text";
-    $arrPostData['messages'][0]['text'] = 'ขอบคุณที่สอนครับ';
-  }
+          $x_tra = str_replace("คุณแซงค์จำนะ","", $_msg);
+          $pieces = explode("-", $x_tra);
+          $_question=str_replace(" ","",$pieces[0]);
+          $_answer=str_replace("","",$pieces[1]);
+          //Post New Data
+          $newData = json_encode(
+            array(
+              'question' => $_question,
+              'answer'=> $_answer
+            )
+          );
+          $opts = array(
+            'http' => array(
+                'method' => "POST",
+                'header' => "Content-type: application/json",
+                'content' => $newData
+             )
+          );
+          $context = stream_context_create($opts);
+          $returnValue = file_get_contents($url,false,$context);
+          $arrPostData = array();
+          $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
+          $arrPostData['messages'][0]['type'] = "text";
+          $arrPostData['messages'][0]['text'] = 'ขอบคุณที่สอนครับ';
+        }
 /*}else{
   if($isData>0){
    foreach($data as $rec){
@@ -62,20 +62,20 @@ if (strpos($_msg, 'คุณแซงค์จำนะ') !== false) {
     }*/
   
     }else{
-  if($isData >0){
-   foreach($data as $rec){
-    $arrPostData = array();
-    $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
-    $arrPostData['messages'][0]['type'] = "text";
-    $arrPostData['messages'][0]['text'] = $rec->answer;
-   }
-  }else{
-    $arrPostData = array();
-    $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
-    $arrPostData['messages'][0]['type'] = "text";
-    $arrPostData['messages'][0]['text'] = 'ก๊าบบ คุณสามารถสอนให้ฉลาดได้เพียงพิมพ์: สอนเป็ด[คำถาม|คำตอบ]';
-  }
-}
+          if($isData >0){
+           foreach($data as $rec){
+            $arrPostData = array();
+            $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
+            $arrPostData['messages'][0]['type'] = "text";
+            $arrPostData['messages'][0]['text'] = $rec->answer;
+           }
+          }else{
+            $arrPostData = array();
+            $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
+            $arrPostData['messages'][0]['type'] = "text";
+            $arrPostData['messages'][0]['text'] = 'ก๊าบบ คุณสามารถสอนให้ฉลาดได้เพียงพิมพ์: สอนเป็ด[คำถาม|คำตอบ]';
+          }
+        }
     
     
     
