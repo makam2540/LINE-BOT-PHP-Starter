@@ -14,7 +14,7 @@ $json = file_get_contents('https://api.mlab.com/api/1/databases/junebot/collecti
 $data = json_decode($json);
 $isData=sizeof($data);
 
-echo "==".$data;
+//echo "==".$data;
 
 if (strpos($_msg, 'น้องเน่จำนะ') !== false) {
   if (strpos($_msg, 'น้องเน่จำนะ') !== false) {
