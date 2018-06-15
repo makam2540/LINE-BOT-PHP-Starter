@@ -1,74 +1,97 @@
 <?php
+$strAccessToken = "7YR60AJ855Zu1Etxsc7aCdFqhip1o8yAKj7PzLe90ClE9Po0fz5o81BeghtpCki4+zFZ7FrYjjbrFvQw84+Axi+P1zWPnxSCTl/lF5gVTDaDqdC5IHk30qnjo7GQ1hHKizexgGNpBPn/Fwz3slJqkQdB04t89/1O/w1cDnyilFU=";
+$content = file_get_contents('php://input');
+$arrJson = json_decode($content, true);
+$strUrl = "https://api.line.me/v2/bot/message/reply";
+$arrHeader = array();
+$arrHeader[] = "Content-Type: application/json";
+$arrHeader[] = "Authorization: Bearer {$strAccessToken}";
+$_msg = $arrJson['events'][0]['message']['text'];
 
-    $accessToken = "Rz8z1ee8jjPGKgYsiVruxdBDpWA4ryYEh5QKu7KLtb4o1HN3h38LHyWUEoWYOGVolNmGP1fFw7UbxocelHU/0Y/j+b2/jch/cpqEW6dhyi8smlFI+vsQVttuzLtCZPHm5K7MNg39sFK7Z8jWxhv7ngdB04t89/1O/w1cDnyilFU=";//copy Channel access token ตอนที่ตั้งค่ามาใส่
+//$api_key="c-9iVt7OvlHt_HeJci-4E3dL-PpBhF77";
+//$url = 'https://api.mlab.com/api/1/databases/junebot/collections/question?apiKey='.$api_key.'';
+//$json = file_get_contents('https://api.mlab.com/api/1/databases/junebot/collections/question?apiKey='.$api_key.'&q={"question":"'.$_msg.'"}');
+//$data = json_decode($json);
+//$isData=sizeof($data);
+
+
+
+if (strpos($_msg, 'น้องเน่จำนะ') !== false) {
+  if (strpos($_msg, 'น้องเน่จำนะ') !== false) {
+    $x_tra = str_replace("น้องเน่จำนะ","", $_msg);
+    $pieces = explode(",", $x_tra);
+    $_question=str_replace(" ","",$pieces[0]);
+    $_answer=str_replace("","",$pieces[1]);
+    //Post New Data
+//    $newData = json_encode(  
+//      array(
+//       'question' => $_question,
+//        'answer'=> $_answer
+//      )
+//    );
+//    $opts = array(
+//      'http' => array(
+//          'method' => "POST",
+//          'header' => "Content-type: application/json",
+//          'content' => $newData
+//       )
+//    );
+//   $context = stream_context_create($opts);
+//    $returnValue = file_get_contents($url,false,$context);
+    $arrPostData = array();
+    $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
+    $arrPostData['messages'][0]['type'] = "text";
+    $arrPostData['messages'][0]['text'] = 'ขอบคุณนะ (´▽｀)';
+  }
+}else{
+//  if($isData>0){
+//   foreach($data as $rec){
+//    $arrPostData = array();
+//    $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
+//        if( sizeof($rec->answer) > 0){
+//                $arrPostData['messages'][0]['type'] = "text";
+//                $arrPostData['messages'][0]['text'] = $rec->answer;
+//        }
+//        else{
+            $arrPostData = array();
+            $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
+            $arrPostData['messages'][0]['type'] = "text";
+            $arrPostData['messages'][0]['text'] = 'บอกว่าไม่รู้เรื่องไงครับ สอนผมสิๆ';
+//        }
+//    }
+//  }else{
+//    $arrPostData = array();
+//    $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
+//    $arrPostData['messages'][0]['type'] = "text";
+//    $arrPostData['messages'][0]['text'] = 'อันนี้ไม่รู้เรื่องครับ สอนหน่อย';
     
-    $content = file_get_contents('php://input');
-    $arrayJson = json_decode($content, true);
-    
-    $arrayHeader = array();
-    $arrayHeader[] = "Content-Type: application/json";
-    $arrayHeader[] = "Authorization: Bearer {$accessToken}";
 
-    //รับข้อความจากผู้ใช้
-    //$message = "ทำไร";
-    $message = $arrayJson['events'][0]['message']['text'];
-
-    //include('connect.php');
+//    $nonData = json_encode(  
+//        array(
+//          'question' => $_msg,
+//        )
+//      );
+//      $opts = array(
+//        'http' => array(
+//            'method' => "POST",
+//            'header' => "Content-type: application/json",
+//            'content' => $nonData
+//         )
+//      );
+//      $context = stream_context_create($opts);
+//      $returnValue = file_get_contents($url,false,$context);
+      //$arrPostData = array();
    
-    //$sql = mysqli_connect("localhost","root","","db_junebot");
-    //$sql->set_charset("utf8");
-    
-   // $query = mysqli_query($sql,"select*from question ");
-  //  $row = mysqli_num_rows($query);
-    
-   // echo "==".$row;
-    
-    
-    // $data = mysqli_fetch_assoc($query);
-     
-     //echo $data['q_id'];
-     
- /*    $query2 = mysqli_query($sql,"select*from answer where a_id = '$data['a_id']' ");
-    $data2 = mysqli_fetch_assoc($query2);
-
-    
-    $arrayPostData['replyToken'] = $arrayJson['events'][0]['replyToken'];
-    $arrayPostData['messages'][0]['type'] = "text";
-    $arrayPostData['messages'][0]['text'] = "ffffasdasdasd"; //$data2['a_id']
-    replyMsg($arrayHeader,$arrayPostData);
-  */  
-
-    #ตัวอย่าง Message Type "Text"
-    if($message == "สวัสดี"){
-        $arrayPostData['replyToken'] = $arrayJson['events'][0]['replyToken'];
-        $arrayPostData['messages'][0]['type'] = "text";
-        $arrayPostData['messages'][0]['text'] = "สวัสดีจ้าาา";
-        replyMsg($arrayHeader,$arrayPostData);
-    }else {
-        $arrayPostData['replyToken'] = $arrayJson['events'][0]['replyToken'];
-        $arrayPostData['messages'][0]['type'] = "text";
-        $arrayPostData['messages'][0]['text'] = "โทดที ยังโง่อยู่ เลยไม่เข้าใจ";
-        replyMsg($arrayHeader,$arrayPostData);        
-    }
-
-
-    
-function replyMsg($arrayHeader,$arrayPostData){
-        $strUrl = "https://api.line.me/v2/bot/message/reply";
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL,$strUrl);
-        curl_setopt($ch, CURLOPT_HEADER, false);
-        curl_setopt($ch, CURLOPT_POST, true);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $arrayHeader);    
-        curl_setopt($ch, CURLOPT_POSTFIELDS,json_encode($arrayPostData));
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER,true);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-        $result = curl_exec($ch);
-        curl_close ($ch);
-    }
-
-
-   exit;
-
-
+//  }
+}
+$channel = curl_init();
+curl_setopt($channel, CURLOPT_URL,$strUrl);
+curl_setopt($channel, CURLOPT_HEADER, false);
+curl_setopt($channel, CURLOPT_POST, true);
+curl_setopt($channel, CURLOPT_HTTPHEADER, $arrHeader);
+curl_setopt($channel, CURLOPT_POSTFIELDS, json_encode($arrPostData));
+curl_setopt($channel, CURLOPT_RETURNTRANSFER,true);
+curl_setopt($channel, CURLOPT_SSL_VERIFYPEER, false);
+$result = curl_exec($channel);
+curl_close ($channel);
 ?>
