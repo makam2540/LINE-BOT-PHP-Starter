@@ -6,7 +6,6 @@ $strUrl = "https://api.line.me/v2/bot/message/reply";
 $arrHeader = array();
 $arrHeader[] = "Content-Type: application/json";
 $arrHeader[] = "Authorization: Bearer {$strAccessToken}";
-
 $_msg = $arrJson['events'][0]['message']['text'];
 
 $api_key="7wjZz1XxwnIgY8jDYbPDa_XpDZTtNWsp";
@@ -15,45 +14,45 @@ $json = file_get_contents('https://api.mlab.com/api/1/databases/sangster-bot/col
 $data = json_decode($json);
 $isData=sizeof($data);
 
-echo "==".$isData;
 
-if (strpos($_msg, 'คุณแซงค์จำนะ') !== false) {
-        if (strpos($_msg, 'คุณแซงค์จำนะ') !== false) {
-          $x_tra = str_replace("คุณแซงค์จำนะ","", $_msg);
-          $pieces = explode(",", $x_tra);
-          $_question=str_replace(" ","",$pieces[0]);
-          $_answer=str_replace("","",$pieces[1]); 
-          //Post New Data
-          $newData = json_encode(  
-            array(
-             'question' => $_question,
-              'answer'=> $_answer
-            )
-          );//exit();
-          $opts = array(
-            'http' => array(
-                'method' => "POST",
-                'header' => "Content-type: application/json",
-                'content' => $newData
-             )
-          ); 
-          $context = stream_context_create($opts);
-          $returnValue = file_get_contents($url,false,$context);
-          $arrPostData = array();
-          $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
-          $arrPostData['messages'][0]['type'] = "text";
-          $arrPostData['messages'][0]['text'] = 'ขอบคุณนะครับ';
-        } //exit();
-        }else{
-  if($isData>0){
-   foreach($data as $rec){
+
+if (strpos($_msg, 'น้องเน่จำนะ') !== false) {
+  if (strpos($_msg, 'น้องเน่จำนะ') !== false) {
+    $x_tra = str_replace("น้องเน่จำนะ","", $_msg);
+    $pieces = explode(",", $x_tra);
+    $_question=str_replace(" ","",$pieces[0]);
+    $_answer=str_replace("","",$pieces[1]);
+    //Post New Data
+//    $newData = json_encode(  
+//      array(
+//       'question' => $_question,
+//        'answer'=> $_answer
+//      )
+//    );
+//    $opts = array(
+//      'http' => array(
+//          'method' => "POST",
+//          'header' => "Content-type: application/json",
+//          'content' => $newData
+//       )
+//    );
+//   $context = stream_context_create($opts);
+//    $returnValue = file_get_contents($url,false,$context);
     $arrPostData = array();
     $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
-        if( sizeof($rec->answer) > 0){
-                $arrPostData['messages'][0]['type'] = "text";
-                $arrPostData['messages'][0]['text'] = $rec->answer;
-        }
-        else{
+    $arrPostData['messages'][0]['type'] = "text";
+    $arrPostData['messages'][0]['text'] = 'ขอบคุณนะ (´▽｀)';
+  }
+}else{
+//  if($isData>0){
+//   foreach($data as $rec){
+//    $arrPostData = array();
+//    $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
+//        if( sizeof($rec->answer) > 0){
+//                $arrPostData['messages'][0]['type'] = "text";
+//                $arrPostData['messages'][0]['text'] = $rec->answer;
+//        }
+//        else{
             $arrPostData = array();
             $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
             $arrPostData['messages'][0]['type'] = "text";
