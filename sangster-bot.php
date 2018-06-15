@@ -14,7 +14,7 @@ $json = file_get_contents('https://api.mlab.com/api/1/databases/junebot/collecti
 $data = json_decode($json);
 $isData=sizeof($data);
 
-
+echo "==".$data;
 
 if (strpos($_msg, 'น้องเน่จำนะ') !== false) {
   if (strpos($_msg, 'น้องเน่จำนะ') !== false) {
@@ -35,8 +35,8 @@ if (strpos($_msg, 'น้องเน่จำนะ') !== false) {
           'header' => "Content-type: application/json",
           'content' => $newData
        )
-    ); exit();
-   $context = stream_context_create($opts);
+    ); 
+    $context = stream_context_create($opts);
     $returnValue = file_get_contents($url,false,$context);
     $arrPostData = array();
     $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
