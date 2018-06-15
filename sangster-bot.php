@@ -14,7 +14,7 @@ $json = file_get_contents('https://api.mlab.com/api/1/databases/sangster/collect
 $data = json_decode($json);
 $isData=sizeof($data);
 
-//echo "==".$data;
+echo "==".$isData;
 
 if (strpos($_msg, 'คุณแซงค์จำนะ') !== false) {
         if (strpos($_msg, 'คุณแซงค์จำนะ') !== false) {
