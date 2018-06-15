@@ -44,15 +44,15 @@ if (strpos($_msg, 'คุณแซงค์จำนะ') !== false) {
           $arrPostData['messages'][0]['text'] = 'ขอบคุณนะครับ';
         } //exit();
         }else{
-//  if($isData>0){
-//   foreach($data as $rec){
-//    $arrPostData = array();
-//    $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
-//        if( sizeof($rec->answer) > 0){
-//                $arrPostData['messages'][0]['type'] = "text";
-//                $arrPostData['messages'][0]['text'] = $rec->answer;
-//        }
-//        else{
+  if($isData>0){
+   foreach($data as $rec){
+    $arrPostData = array();
+    $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
+        if( sizeof($rec->answer) > 0){
+                $arrPostData['messages'][0]['type'] = "text";
+                $arrPostData['messages'][0]['text'] = $rec->answer;
+        }
+        else{
             $arrPostData = array();
             $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
             $arrPostData['messages'][0]['type'] = "text";
