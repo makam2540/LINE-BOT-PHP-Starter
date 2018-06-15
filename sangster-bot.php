@@ -41,22 +41,23 @@ if (strpos($_msg, 'คุณแซงค์จำนะ') !== false) {
     $arrPostData = array();
     $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
     $arrPostData['messages'][0]['type'] = "text";
-    $arrPostData['messages'][0]['text'] = 'ขอบคุณที่สอนเป็ด';
+    $arrPostData['messages'][0]['text'] = 'ขอบคุณที่สอนครับ';
   }
 }else{
-//  if($isData>0){
-//   foreach($data as $rec){
-//    $arrPostData = array();
-//    $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
-//        if( sizeof($rec->answer) > 0){
-//                $arrPostData['messages'][0]['type'] = "text";
-//                $arrPostData['messages'][0]['text'] = $rec->answer;
-//        }
+  if($isData>0){
+   foreach($data as $rec){
+    $arrPostData = array();
+    $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
+        if( sizeof($rec->answer) > 0){
+                $arrPostData['messages'][0]['type'] = "text";
+                $arrPostData['messages'][0]['text'] = $rec->answer;
+        }
 //        else{
-            $arrPostData = array();
-            $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
-            $arrPostData['messages'][0]['type'] = "text";
-            $arrPostData['messages'][0]['text'] = 'บอกว่าไม่รู้เรื่องไงครับ สอนผมสิๆ';
+  //          $arrPostData = array();
+    //      $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
+      //      $arrPostData['messages'][0]['type'] = "text";
+     //     $arrPostData['messages'][0]['text'] = 'บอกว่าไม่รู้เรื่องไงครับ สอนผมสิๆ';
+     
 //        }
 //    }
 //  }else{
