@@ -66,28 +66,7 @@ if (strpos($_msg, 'คุณแซงค์จำนะ') !== false) {
 }
 
 
-}else{
-   $arrPostData = array();
-   $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
-   $arrPostData['messages'][0]['type'] = "text";
-   $arrPostData['messages'][0]['text'] = 'อันนี้ไม่รู้เรื่องครับ สอนหน่อย';
-    
-   $nonData = json_encode(  
-       array(
-         'question' => $_msg,
-       )
-     );
-     $opts = array(
-       'http' => array(
-           'method' => "POST",
-           'header' => "Content-type: application/json",
-           'content' => $nonData
-        )
-     );
-     $context = stream_context_create($opts);
-     $returnValue = file_get_contents($url,false,$context);
- }
-}
+
 
 $channel = curl_init();
 curl_setopt($channel, CURLOPT_URL,$strUrl);
