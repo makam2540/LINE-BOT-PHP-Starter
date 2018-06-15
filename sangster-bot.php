@@ -66,7 +66,7 @@ if (strpos($_msg, 'คุณแซงค์จำนะ') !== false) {
 
 }
 else{
-                
+                if($isData >0){
                   $nonData = json_encode(  
                        array(
                          'question' => $_msg,
@@ -85,8 +85,9 @@ else{
                   $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
                   $arrPostData['messages'][0]['type'] = "text";
                   $arrPostData['messages'][0]['text'] = 'เขาไม่รู้เรื่องอ่ะ สอนเขาหน่อยสิเธอ';
+                }
         }
-
+}
   
 
 $channel = curl_init();
