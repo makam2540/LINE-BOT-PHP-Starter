@@ -66,8 +66,7 @@ if (strpos($_msg, 'คุณแซงค์จำนะ') !== false) {
           
            $nData = json_encode(
                    array(
-                      'question' => $_question,
-                      'answer'=> $_answer
+                      'question' => $_msg
                      )
                   );
                   $opts = array(
