@@ -1,96 +1,107 @@
-<?php
+var express = require('express')
+var bodyParser = require('body-parser')
+var request = require('request')
+var app = express()
 
-$strAccessToken = "Rz8z1ee8jjPGKgYsiVruxdBDpWA4ryYEh5QKu7KLtb4o1HN3h38LHyWUEoWYOGVolNmGP1fFw7UbxocelHU/0Y/j+b2/jch/cpqEW6dhyi8smlFI+vsQVttuzLtCZPHm5K7MNg39sFK7Z8jWxhv7ngdB04t89/1O/w1cDnyilFU=";
+const line = require('@line/bot-sdk');
 
-$content = file_get_contents('php://input');
-$arrJson = json_decode($content, true);
+var Q_id
+var topic
 
-$strUrl = "https://api.line.me/v2/bot/message/reply";
+var sql = require('mssql')
+var sqlInstance = require("mssql")
 
-$arrHeader = array();
-$arrHeader[] = "Content-Type: application/json";
-$arrHeader[] = "Authorization: Bearer {$strAccessToken}";
+app.use(bodyParser.json())
 
-$_msg = $arrJson['events'][0]['message']['text'];
+app.set('port', (process.env.PORT || 4000))
+app.use(bodyParser.urlencoded({extended: true}))
+app.use(bodyParser.json())
+
+// var port = process.env.PORT || 7777;
+
+// // parse application/json
+// app.use(bodyParser.json());
+// app.use(bodyParser.urlencoded({
+// 	extended: true
+// }));
+
+// // connect to your database
+
+//  var dbConfig = {
+//                       user: 'sa',
+//                       password: 'P@ssw0rd1234',
+//                       server: 'demomagic2.southeastasia.cloudapp.azure.com', 
+//                       database: 'LinebotDB',
+//                       port:1433,
+//                       options: {
+//                           encrypt: true // Use this if you're on Windows Azure
+//                       }                      
+//     };
 
 
-$api_key="7wjZz1XxwnIgY8jDYbPDa_XpDZTtNWsp";
-$url = 'https://api.mlab.com/api/1/databases/sangster-bot/collections/q_sangster?apiKey='.$api_key.'';
-$json = file_get_contents('https://api.mlab.com/api/1/databases/sangster-bot/collections/q_sangster?apiKey='.$api_key.'&q={"question":"'.$_msg.'"}');
-$data = json_decode($json);
-$isData=sizeof($data);
-
-if (strpos($_msg, 'คุณแซงค์จำนะ') !== false) {
-  if (strpos($_msg, 'คุณแซงค์จำนะ') !== false) {
-    $x_tra = str_replace("คุณแซงค์จำนะ","", $_msg);
-    $pieces = explode("|", $x_tra);
-    $_question =str_replace(" ","",$pieces[0]);
-    $_answer =str_replace("","",$pieces[1]);
-    //Post New Data
-    $newData = json_encode(
-      array(
-        'question' => $_question,
-        'answer'=> $_answer
-      )
-    );
-    $opts = array(
-      'http' => array(
-          'method' => "POST",
-          'header' => "Content-type: application/json",
-          'content' => $newData
-       )
-    );
-    $context = stream_context_create($opts);
-    $returnValue = file_get_contents($url,false,$context);
-    $arrPostData = array();
-    $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
-    $arrPostData['messages'][0]['type'] = "text";
-    $arrPostData['messages'][0]['text'] = 'ขอบคุณที่สอนครับ';
-  }
+const client = new line.Client({
   
-}else{
-        if($isData >0){
-         foreach($data as $rec){
-          $arrPostData = array();
-          $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
-          $arrPostData['messages'][0]['type'] = "text";
-          $arrPostData['messages'][0]['text'] = $rec->answer;
-         }
+  channelAccessToken: 'Rz8z1ee8jjPGKgYsiVruxdBDpWA4ryYEh5QKu7KLtb4o1HN3h38LHyWUEoWYOGVolNmGP1fFw7UbxocelHU/0Y/j+b2/jch/cpqEW6dhyi8smlFI+vsQVttuzLtCZPHm5K7MNg39sFK7Z8jWxhv7ngdB04t89/1O/w1cDnyilFU='
+});
 
-        }else{
-          $arrPostData = array();
-          $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
-          $arrPostData['messages'][0]['type'] = "text";
-          $arrPostData['messages'][0]['text'] = 'เขาไม่รู้เรื่องอ่ะ สอนเขาหน่อยสิ';
-          
-          
-           $nData = json_encode(
-                   array(
-                      'question' => $_msg
-                     )
-                  );
-                  $opts = array(
-                    'http' => array(
-                        'method' => "POST",
-                        'header' => "Content-type: application/json",
-                        'content' => $nData
-                     )
-                  );
-                  $context = stream_context_create($opts);
-                  $returnValue = file_get_contents($url,false,$context);
-        }
+app.post('/webhook', (req, res) => {
+//   var text = req.body.events[0].message.text
+  var text = req.body.events[0].message.type
+  var sender = req.body.events[0].source.userId
+  var replyToken = req.body.events[0].replyToken
+
+  console.log(text, sender, replyToken)
+  console.log(typeof sender, typeof text)
+  
+    sendText(sender, text)
+
+  res.sendStatus(200)
+})
+
+
+function sendText (sender, msg) {
+
+
+  client.getMessageContent(msg)
+  .then((stream) => {
+    stream.on('data', (chunk) => {
+      
+                          let data = {
+                            to: sender,
+                            messages: [
+                              {
+                                type: "text",
+                                text : chunk
+                                
+                              }
+                            ]
+                          }
+                  
+                  request({
+                    headers: {
+                      'Content-Type': 'application/json',
+                      'Authorization': 'Bearer Rz8z1ee8jjPGKgYsiVruxdBDpWA4ryYEh5QKu7KLtb4o1HN3h38LHyWUEoWYOGVolNmGP1fFw7UbxocelHU/0Y/j+b2/jch/cpqEW6dhyi8smlFI+vsQVttuzLtCZPHm5K7MNg39sFK7Z8jWxhv7ngdB04t89/1O/w1cDnyilFU='
+                    },
+                    url: 'https://api.line.me/v2/bot/message/push',
+                    method: 'POST',
+                    body: data,
+                    json: true
+                  }, function (err, res, body) {
+                    if (err) console.log('error')
+                    if (res) console.log('success')
+                    if (body) console.log(body)
+                  })   
+
+
+});
+stream.on('error', (err) => {
+  // error handling
+});
+});
 
 }
- 
 
-$channel = curl_init();
-curl_setopt($channel, CURLOPT_URL,$strUrl);
-curl_setopt($channel, CURLOPT_HEADER, false);
-curl_setopt($channel, CURLOPT_POST, true);
-curl_setopt($channel, CURLOPT_HTTPHEADER, $arrHeader);
-curl_setopt($channel, CURLOPT_POSTFIELDS, json_encode($arrPostData));
-curl_setopt($channel, CURLOPT_RETURNTRANSFER,true);
-curl_setopt($channel, CURLOPT_SSL_VERIFYPEER, false);
-$result = curl_exec($channel);
-curl_close ($channel);
-?>
+app.listen(app.get('port'), function () {
+  console.log('run at port', app.get('port'))
+})
+
